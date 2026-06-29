@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Header() {
+  const pathName = usePathname();
   return (
     <header className="bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
@@ -29,23 +32,16 @@ function Header() {
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="/"
-            className="relative py-2 text-sm font-semibold text-indigo-600"
+            className={`relative py-2 text-sm font-medium transition-colors duration-300   ${pathName === "/" ? "text-indigo-600 font-semibold" : "text-gray-500 hover:text-gray-900 transition"}`}
           >
             Shop
-            <span className="absolute left-0 -bottom-px w-full h-0.5 bg-indigo-600"></span>
           </Link>
           <Link
             href="/add-product"
-            className="py-2 text-sm font-medium text-gray-500 hover:text-gray-900 transition"
+            className={`relative py-2 text-sm font-medium transition-colors duration-300  ${pathName === "/add-product" ? "text-indigo-600 font-semibold" : "text-gray-500 hover:text-gray-900 transition"}`}
           >
             Add Product
           </Link>
-          <a
-            href="#"
-            className="py-2 text-sm font-medium text-gray-500 hover:text-gray-900 transition"
-          >
-            Upload Song
-          </a>
         </nav>
 
         {/* <!-- Avatar --> */}
