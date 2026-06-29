@@ -60,10 +60,11 @@ function AddFrom({
           </label>
           <label
             htmlFor="photo-input"
-            className="flex flex-col items-center justify-center gap-2 h-44 rounded-xl border-2 border-dashed border-indigo-200 bg-indigo-50/40 cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition text-center px-4 overflow-hidden"
+            className="relative flex flex-col items-center justify-center gap-2 h-44 rounded-xl border-2 border-dashed border-indigo-200 bg-indigo-50/40 cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition text-center px-4 overflow-hidden"
           >
             {imagePreview ? (
-              <Image
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
                 src={imagePreview}
                 alt="Product preview"
                 className="h-full w-full object-cover rounded-lg"
@@ -157,7 +158,7 @@ function AddFrom({
         </label>
         <textarea
           id="description"
-          rows="4"
+          rows={4}
           placeholder="Enter product description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}

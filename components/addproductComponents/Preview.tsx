@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 type PreviewProps = {
   title: string;
   price: string | number;
@@ -29,11 +27,11 @@ export default function Preview({
           className="relative w-24 h-24 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0 overflow-hidden"
         >
           {imagePreview ? (
-            <Image
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={imagePreview}
-              alt="Preview"
-              fill
-              className="object-cover"
+              alt="Product preview"
+              className="h-full w-full object-cover rounded-lg"
             />
           ) : (
             <svg
