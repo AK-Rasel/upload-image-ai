@@ -27,6 +27,7 @@ type AddFormProps = {
   adjustStock: (delta: number) => void;
 
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  isAnalyzing: boolean;
 };
 
 function AddFrom({
@@ -46,6 +47,7 @@ function AddFrom({
   handleImageChange,
   adjustStock,
   handleSubmit,
+  isAnalyzing,
 }: AddFormProps) {
   return (
     <form
@@ -58,6 +60,50 @@ function AddFrom({
           <label className="block text-sm font-semibold text-gray-800 mb-2">
             Product Image <span className="text-red-500">*</span>
           </label>
+          {/* <label
+            htmlFor="photo-input"
+            className="relative flex flex-col items-center justify-center gap-2 h-44 rounded-xl border-2 border-dashed border-indigo-200 bg-indigo-50/40 cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition text-center px-4 overflow-hidden"
+          >
+            {imagePreview ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={imagePreview}
+                alt="Product preview"
+                className="h-full w-full object-cover rounded-lg"
+              />
+            ) : (
+              <>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-7 h-7 text-indigo-500"
+                >
+                  <path d="M12 19V5" />
+                  <path d="M5 12l7-7 7 7" />
+                </svg>
+                <span
+                  id="photo-label"
+                  className="text-indigo-600 font-medium text-sm"
+                >
+                  Upload product image
+                </span>
+                <span className="text-gray-400 text-xs">
+                  PNG, JPG up to 5MB
+                </span>
+              </>
+            )}
+            <input
+              id="photo-input"
+              type="file"
+              accept="image/png, image/jpeg"
+              className="sr-only"
+              onChange={handleImageChange}
+            />
+          </label> */}
           <label
             htmlFor="photo-input"
             className="relative flex flex-col items-center justify-center gap-2 h-44 rounded-xl border-2 border-dashed border-indigo-200 bg-indigo-50/40 cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition text-center px-4 overflow-hidden"
@@ -94,6 +140,35 @@ function AddFrom({
                 </span>
               </>
             )}
+
+            {/* AI analyzing overlay */}
+            {isAnalyzing && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/50 backdrop-blur-sm text-white">
+                <svg
+                  className="w-7 h-7 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+                <span className="text-xs font-medium px-3 text-center animate-pulse">
+                  🤖 AI is reading the image...
+                </span>
+              </div>
+            )}
+
             <input
               id="photo-input"
               type="file"

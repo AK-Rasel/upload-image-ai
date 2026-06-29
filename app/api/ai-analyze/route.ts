@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
     });
 
     const result = JSON.parse(response.text ?? "{}");
-    console.log(result);
+
     return NextResponse.json(result);
   } catch (err) {
     console.error("Gemini analyze error:", err);

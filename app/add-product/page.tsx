@@ -133,6 +133,7 @@ export default function AddProduct() {
           handleImageChange={handleImageChange}
           adjustStock={adjustStock}
           handleSubmit={handleSubmit}
+          isAnalyzing={isAnalyzing}
         />
 
         <div className="flex flex-col gap-6">
