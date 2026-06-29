@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Dispatch, SetStateAction, ChangeEvent, FormEvent } from "react";
 
 type AddFormProps = {
@@ -14,6 +13,9 @@ type AddFormProps = {
   category: string;
   setCategory: Dispatch<SetStateAction<string>>;
 
+  brand: string;
+  setBrand: Dispatch<SetStateAction<string>>;
+
   stock: number;
   setStock: Dispatch<SetStateAction<number>>;
 
@@ -28,6 +30,15 @@ type AddFormProps = {
 
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   isAnalyzing: boolean;
+  isSubmitting: boolean;
+  errors: {
+    title?: string;
+    price?: string;
+    description?: string;
+    category?: string;
+    brand?: string;
+    image?: string;
+  };
 };
 
 function AddFrom({
@@ -39,6 +50,8 @@ function AddFrom({
   setDescription,
   category,
   setCategory,
+  brand,
+  setBrand,
   stock,
   setStock,
   featured,
@@ -48,6 +61,8 @@ function AddFrom({
   adjustStock,
   handleSubmit,
   isAnalyzing,
+  isSubmitting,
+  errors,
 }: AddFormProps) {
   return (
     <form
@@ -60,50 +75,6 @@ function AddFrom({
           <label className="block text-sm font-semibold text-gray-800 mb-2">
             Product Image <span className="text-red-500">*</span>
           </label>
-          {/* <label
-            htmlFor="photo-input"
-            className="relative flex flex-col items-center justify-center gap-2 h-44 rounded-xl border-2 border-dashed border-indigo-200 bg-indigo-50/40 cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition text-center px-4 overflow-hidden"
-          >
-            {imagePreview ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={imagePreview}
-                alt="Product preview"
-                className="h-full w-full object-cover rounded-lg"
-              />
-            ) : (
-              <>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-7 h-7 text-indigo-500"
-                >
-                  <path d="M12 19V5" />
-                  <path d="M5 12l7-7 7 7" />
-                </svg>
-                <span
-                  id="photo-label"
-                  className="text-indigo-600 font-medium text-sm"
-                >
-                  Upload product image
-                </span>
-                <span className="text-gray-400 text-xs">
-                  PNG, JPG up to 5MB
-                </span>
-              </>
-            )}
-            <input
-              id="photo-input"
-              type="file"
-              accept="image/png, image/jpeg"
-              className="sr-only"
-              onChange={handleImageChange}
-            />
-          </label> */}
           <label
             htmlFor="photo-input"
             className="relative flex flex-col items-center justify-center gap-2 h-44 rounded-xl border-2 border-dashed border-indigo-200 bg-indigo-50/40 cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition text-center px-4 overflow-hidden"
@@ -141,7 +112,6 @@ function AddFrom({
               </>
             )}
 
-            {/* AI analyzing overlay */}
             {isAnalyzing && (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/50 backdrop-blur-sm text-white">
                 <svg
@@ -177,9 +147,12 @@ function AddFrom({
               onChange={handleImageChange}
             />
           </label>
+          {errors.image && (
+            <p className="text-red-500 text-xs mt-1.5">{errors.image}</p>
+          )}
         </div>
 
-        {/* Title + Price */}
+        {/* Title + Brand + Price */}
         <div className="flex flex-col gap-6">
           <div>
             <label
@@ -194,9 +167,41 @@ function AddFrom({
               placeholder="Enter product title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 transition"
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 transition ${
+                errors.title
+                  ? "border-red-300 focus:ring-red-100 focus:border-red-400"
+                  : "border-gray-200 focus:ring-indigo-100 focus:border-indigo-400"
+              }`}
             />
+            {errors.title && (
+              <p className="text-red-500 text-xs mt-1.5">{errors.title}</p>
+            )}
           </div>
+
+          <div>
+            <label
+              htmlFor="brand"
+              className="block text-sm font-semibold text-gray-800 mb-2"
+            >
+              Brand <span className="text-red-500">*</span>
+            </label>
+            <input
+              id="brand"
+              type="text"
+              placeholder="Enter brand name"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 transition ${
+                errors.brand
+                  ? "border-red-300 focus:ring-red-100 focus:border-red-400"
+                  : "border-gray-200 focus:ring-indigo-100 focus:border-indigo-400"
+              }`}
+            />
+            {errors.brand && (
+              <p className="text-red-500 text-xs mt-1.5">{errors.brand}</p>
+            )}
+          </div>
+
           <div>
             <label
               htmlFor="price"
@@ -204,7 +209,13 @@ function AddFrom({
             >
               Price <span className="text-red-500">*</span>
             </label>
-            <div className="flex rounded-lg border border-gray-200 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-100 focus-within:border-indigo-400 transition">
+            <div
+              className={`flex rounded-lg border overflow-hidden focus-within:ring-2 transition ${
+                errors.price
+                  ? "border-red-300 focus-within:ring-red-100 focus-within:border-red-400"
+                  : "border-gray-200 focus-within:ring-indigo-100 focus-within:border-indigo-400"
+              }`}
+            >
               <span className="flex items-center px-3 bg-gray-50 border-r border-gray-200 text-gray-500 text-sm">
                 $
               </span>
@@ -219,6 +230,9 @@ function AddFrom({
                 className="w-full px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [appearance:textfield]"
               />
             </div>
+            {errors.price && (
+              <p className="text-red-500 text-xs mt-1.5">{errors.price}</p>
+            )}
           </div>
         </div>
       </div>
@@ -237,8 +251,15 @@ function AddFrom({
           placeholder="Enter product description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 transition resize-none"
+          className={`w-full rounded-lg border px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 transition resize-none ${
+            errors.description
+              ? "border-red-300 focus:ring-red-100 focus:border-red-400"
+              : "border-gray-200 focus:ring-indigo-100 focus:border-indigo-400"
+          }`}
         ></textarea>
+        {errors.description && (
+          <p className="text-red-500 text-xs mt-1.5">{errors.description}</p>
+        )}
       </div>
 
       {/* Category + Stock */}
@@ -255,7 +276,11 @@ function AddFrom({
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full appearance-none rounded-lg border border-gray-200 px-4 py-2.5 text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 transition"
+              className={`w-full appearance-none rounded-lg border px-4 py-2.5 text-sm text-gray-500 focus:outline-none focus:ring-2 transition ${
+                errors.category
+                  ? "border-red-300 focus:ring-red-100 focus:border-red-400"
+                  : "border-gray-200 focus:ring-indigo-100 focus:border-indigo-400"
+              }`}
             >
               <option value="">Select category</option>
               <option>Electronics</option>
@@ -276,6 +301,9 @@ function AddFrom({
               <path d="M6 9l6 6 6-6" />
             </svg>
           </div>
+          {errors.category && (
+            <p className="text-red-500 text-xs mt-1.5">{errors.category}</p>
+          )}
         </div>
         <div>
           <label
@@ -359,21 +387,24 @@ function AddFrom({
       <div className="flex justify-end">
         <button
           type="submit"
-          className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-indigo-700 transition"
+          disabled={isSubmitting}
+          className="cursor-pointer inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-indigo-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Add Product
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4"
-          >
-            <path d="M12 5v14" />
-            <path d="M5 12h14" />
-          </svg>
+          {isSubmitting ? "Saving..." : "Add Product"}
+          {!isSubmitting && (
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-4 h-4"
+            >
+              <path d="M12 5v14" />
+              <path d="M5 12h14" />
+            </svg>
+          )}
         </button>
       </div>
     </form>

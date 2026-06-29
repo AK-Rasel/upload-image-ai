@@ -3,6 +3,7 @@ type PreviewProps = {
   price: string | number;
   description: string;
   category: string;
+  brand: string;
   stock: string | number;
   featured: boolean;
   imagePreview: string | null;
@@ -13,6 +14,7 @@ export default function Preview({
   price,
   description,
   category,
+  brand,
   stock,
   featured,
   imagePreview,
@@ -57,6 +59,8 @@ export default function Preview({
           >
             {title || "Product Title"}
           </p>
+
+          {brand && <p className="text-gray-400 text-xs mt-0.5">{brand}</p>}
 
           <p id="preview-price" className="text-indigo-600 font-bold mt-0.5">
             ${price ? Number(price).toFixed(2) : "0.00"}
