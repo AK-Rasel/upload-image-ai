@@ -2,7 +2,6 @@
 import AddFrom from "@/components/addproductComponents/AddFrom";
 import Preview from "@/components/addproductComponents/Preview";
 import Tips from "@/components/addproductComponents/Tips";
-import Image from "next/image";
 import { useState } from "react";
 
 export default function AddProduct() {
