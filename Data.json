@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    
     "title": "Wireless Bluetooth Headphones",
     "description": "Premium over-ear wireless headphones with active noise cancellation and 30 hours of battery life.",
     "price": 89.99,
@@ -13,7 +13,7 @@
     "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
   },
   {
-    "id": 2,
+   
     "title": "Men's Denim Jacket",
     "description": "Classic blue denim jacket made from premium cotton with a modern slim fit design.",
     "price": 59.99,
@@ -26,7 +26,7 @@
     "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246"
   },
   {
-    "id": 3,
+   
     "title": "Leather Travel Backpack",
     "description": "Stylish leather backpack with multiple compartments, ideal for work and travel.",
     "price": 74.99,
@@ -39,7 +39,7 @@
     "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62"
   },
   {
-    "id": 4,
+   
     "title": "Smart Fitness Watch",
     "description": "Track your health, heart rate, sleep, and workouts with this waterproof smartwatch.",
     "price": 129.99,
@@ -52,7 +52,7 @@
     "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30"
   },
   {
-    "id": 5,
+ 
     "title": "Running Sneakers",
     "description": "Lightweight running shoes with breathable mesh and comfortable cushioning.",
     "price": 69.99,
@@ -65,7 +65,7 @@
     "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
   },
   {
-    "id": 6,
+
     "title": "Polarized Sunglasses",
     "description": "UV400 polarized sunglasses with lightweight metal frame for outdoor activities.",
     "price": 34.99,
@@ -78,7 +78,7 @@
     "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083"
   },
   {
-    "id": 7,
+
     "title": "Wireless Mechanical Keyboard",
     "description": "RGB mechanical keyboard with Bluetooth connectivity and hot-swappable switches.",
     "price": 109.99,
@@ -91,7 +91,7 @@
     "image": "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae"
   },
   {
-    "id": 8,
+
     "title": "Minimalist Desk Lamp",
     "description": "Modern LED desk lamp with adjustable brightness and touch controls.",
     "price": 44.99,

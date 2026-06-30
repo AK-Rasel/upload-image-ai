@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,7 +28,6 @@ export default function Card({ product }: CardProps) {
         href={`/product/${product.id}`}
         className="relative block h-48 bg-indigo-50 flex items-center justify-center overflow-hidden"
       >
-        {/* পরে এখানে Next Image ব্যবহার করতে পারো */}
         <Image
           src={product.image}
           alt={product.title}

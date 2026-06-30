@@ -1,7 +1,15 @@
-import Link from "next/link";
+"use client";
 import React from "react";
 
-export default function TitleRow() {
+type TitleRowProps = {
+  searchQuery: string;
+  setSearchQuery: (val: string) => void;
+};
+
+export default function TitleRow({
+  searchQuery,
+  setSearchQuery,
+}: TitleRowProps) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
       <div>
@@ -24,29 +32,12 @@ export default function TitleRow() {
           </svg>
           <input
             type="text"
-            placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by name or category..."
             className="pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 w-56 sm:w-64 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 transition"
           />
         </div>
-
-        <Link
-          href="/add-product"
-          className="inline-flex items-center gap-1.5 bg-indigo-600 text-white px-4 py-2.5 rounded-lg font-medium text-sm hover:bg-indigo-700 transition whitespace-nowrap"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4"
-          >
-            <path d="M12 5v14" />
-            <path d="M5 12h14" />
-          </svg>
-          Add Product
-        </Link>
       </div>
     </div>
   );

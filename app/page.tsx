@@ -1,27 +1,23 @@
-import TitleRow from "@/components/sub-components/TitleRow";
-import Sidebar from "@/components/sub-components/Sidebar";
-import Card from "@/components/sub-components/Card";
-import AllData from "@/Data.json";
+import ShopContent from "@/components/sub-components/ShopContent";
 
-export default function ShopStore() {
+async function getProducts() {
+  const res = await fetch("http://localhost:3000/api/products", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  return res.json();
+}
+
+export default async function ShopStore() {
+  const data = await getProducts();
+
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10">
-      {/* Title row */}
-      <TitleRow />
-
-      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
-        {/* Sidebar */}
-        <Sidebar />
-
-        {/* Product grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Wireless Headphone */}
-
-          {AllData?.map((product) => (
-            <Card key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
+    <div className="container mx-auto px-4 py-8">
+      <ShopContent products={data.products} />
     </div>
   );
 }
