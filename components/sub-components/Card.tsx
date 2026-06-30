@@ -24,8 +24,8 @@ type CardProps = {
 export default function Card({ product }: CardProps) {
   return (
     <div className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-      <Link
-        href={`/product/${product.id}`}
+      <div
+        // href={`/product/${product.id}`}
         className="relative block h-48 bg-indigo-50 flex items-center justify-center overflow-hidden"
       >
         <Image
@@ -34,7 +34,7 @@ export default function Card({ product }: CardProps) {
           fill
           className="object-cover"
         />
-      </Link>
+      </div>
 
       <div className="p-4">
         <h3 className="font-semibold text-gray-900 truncate">
@@ -52,12 +52,12 @@ export default function Card({ product }: CardProps) {
         </div>
 
         <div className="flex items-center gap-2 mt-4">
-          <Link
-            href={`/product/${product.id}`}
+          <button
+            // href={`/product/${product.id}`}
             className="flex-1 text-center border border-indigo-200 text-indigo-600 font-medium text-sm py-2 rounded-lg hover:bg-indigo-50 transition"
           >
             View Details
-          </Link>
+          </button>
 
           <button
             type="button"

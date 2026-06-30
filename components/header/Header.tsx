@@ -8,7 +8,7 @@ function Header() {
     <header className="bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
         {/* <!-- Logo --> */}
-        <a href="index.html" className="flex items-center gap-2.5 shrink-0">
+        <Link href="/" className="flex items-center gap-2.5 shrink-0">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -26,7 +26,7 @@ function Header() {
             <br />
             Collection
           </span>
-        </a>
+        </Link>
 
         {/* <!-- Nav --> */}
         <nav className="hidden md:flex items-center gap-8">
