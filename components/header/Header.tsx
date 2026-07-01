@@ -9,22 +9,8 @@ function Header() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
         {/* <!-- Logo --> */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-7 h-7 text-indigo-600"
-          >
-            <path d="M6 9V7a4 4 0 0 1 8 0v2" />
-            <path d="M5 9h10l1 11H4z" />
-          </svg>
-          <span className="font-bold leading-tight text-gray-900">
-            Product
-            <br />
-            Collection
+          <span className="font-bold text-2xl leading-tight text-gray-900">
+            <span className="text-indigo-600">Vision</span>Shop
           </span>
         </Link>
 

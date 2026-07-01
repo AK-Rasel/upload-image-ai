@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Product from "@/models/Product";
 
-// GET — sob product fetch korar jonno
+// GET
 export async function GET() {
   try {
     await connectDB();
@@ -17,7 +17,7 @@ export async function GET() {
   }
 }
 
-// POST — notun product add korar jonno
+// POST
 export async function POST(req: NextRequest) {
   try {
     await connectDB();

@@ -22,7 +22,7 @@ export async function connectDB() {
       .connect(MONGODB_URI)
       .then((mongoose) => mongoose)
       .catch((err) => {
-        cached.promise = null; // ⬅️ fail hole cache clear, next call e retry hobe
+        cached.promise = null;
         throw err;
       });
   }

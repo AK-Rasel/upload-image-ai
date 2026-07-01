@@ -134,7 +134,7 @@ function AddFrom({
                   />
                 </svg>
                 <span className="text-xs font-medium px-3 text-center animate-pulse">
-                  🤖 AI is reading the image...
+                  AI is reading the image...
                 </span>
               </div>
             )}

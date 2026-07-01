@@ -17,7 +17,7 @@ export default async function ShopStore() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <ShopContent products={data.products} />
+      <ShopContent initialProducts={data.products} />
     </div>
   );
 }

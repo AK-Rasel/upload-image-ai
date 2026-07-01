@@ -143,7 +143,6 @@ export default function AddProduct() {
 
       await res.json();
 
-      // ✅ success — sob input reset/empty koro
       setTitle("");
       setPrice("");
       setDescription("");
@@ -169,11 +168,7 @@ export default function AddProduct() {
         <p className="text-gray-500 mt-1">
           Add a new product to your collection
         </p>
-        {isAnalyzing && (
-          <p className="text-indigo-600 text-sm mt-2 animate-pulse">
-            🤖 AI is reading the image and filling the form...
-          </p>
-        )}
+
         {aiError && <p className="text-red-500 text-sm mt-2">{aiError}</p>}
         {successMsg && (
           <p className="text-green-600 text-sm mt-2 font-medium">

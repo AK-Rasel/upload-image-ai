@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Tips() {
   return (
     <div className="bg-white border border-gray-100 rounded-xl p-5">

@@ -1,24 +1,36 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Sidebar from "@/components/sub-components/Sidebar";
 import Card from "@/components/sub-components/Card";
 import TitleRow from "@/components/sub-components/TitleRow";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import {
+  fetchProducts,
+  setProducts,
+  type Product,
+} from "@/lib/redux/slices/productsSlice";
+import {
+  setCategory,
+  setMinPrice,
+  setSortBy,
+  setSearchQuery,
+} from "@/lib/redux/slices/filtersSlice";
 
-type Product = {
-  _id: string;
-  title: string;
-  price: number;
-  category: string;
-  [key: string]: any;
-};
+export default function ShopContent({
+  initialProducts,
+}: {
+  initialProducts: Product[];
+}) {
+  const dispatch = useAppDispatch();
 
-export default function ShopContent({ products }: { products: Product[] }) {
-  const [selectedCategory, setSelectedCategory] = useState("All Products");
-  const [minPrice, setMinPrice] = useState(10);
-  const [sortBy, setSortBy] = useState("Newest First");
-  const [searchQuery, setSearchQuery] = useState("");
+  const { items: products } = useAppSelector((state) => state.products);
+  const { selectedCategory, minPrice, maxPrice, sortBy, searchQuery } =
+    useAppSelector((state) => state.filters);
 
-  const MAX_PRICE = 1000;
+  // server theke pawa initial data Redux store-e bosao (hydrate)
+  useEffect(() => {
+    dispatch(setProducts(initialProducts));
+  }, [initialProducts, dispatch]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -31,7 +43,6 @@ export default function ShopContent({ products }: { products: Product[] }) {
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    // search filter — title ba category diye match
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       result = result.filter(
@@ -42,15 +53,12 @@ export default function ShopContent({ products }: { products: Product[] }) {
       );
     }
 
-    // category filter
     if (selectedCategory !== "All Products") {
       result = result.filter((p) => p.category === selectedCategory);
     }
 
-    // price filter
-    result = result.filter((p) => p.price >= minPrice && p.price <= MAX_PRICE);
+    result = result.filter((p) => p.price >= minPrice && p.price <= maxPrice);
 
-    // sort
     switch (sortBy) {
       case "Price: Low to High":
         result.sort((a, b) => a.price - b.price);
@@ -61,33 +69,34 @@ export default function ShopContent({ products }: { products: Product[] }) {
       case "Most Popular":
         result.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
         break;
-      case "Newest First":
       default:
         result.sort(
           (a, b) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
         );
-        break;
     }
 
     return result;
-  }, [products, selectedCategory, minPrice, sortBy, searchQuery]);
+  }, [products, selectedCategory, minPrice, maxPrice, sortBy, searchQuery]);
 
   return (
     <>
-      <TitleRow searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <TitleRow
+        searchQuery={searchQuery}
+        setSearchQuery={(val) => dispatch(setSearchQuery(val))}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
         <Sidebar
           categoryCounts={categoryCounts}
           totalCount={products.length}
           selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
+          setSelectedCategory={(cat) => dispatch(setCategory(cat))}
           minPrice={minPrice}
-          setMinPrice={setMinPrice}
-          maxPrice={MAX_PRICE}
+          setMinPrice={(val) => dispatch(setMinPrice(val))}
+          maxPrice={maxPrice}
           sortBy={sortBy}
-          setSortBy={setSortBy}
+          setSortBy={(val) => dispatch(setSortBy(val))}
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 content-start">
