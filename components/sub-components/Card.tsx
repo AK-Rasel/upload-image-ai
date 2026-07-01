@@ -28,12 +28,7 @@ export default function Card({ product }: CardProps) {
         // href={`/product/${product.id}`}
         className="relative block h-48 bg-indigo-50 flex items-center justify-center overflow-hidden"
       >
-        <Image
-          src={product.image}
-          alt={product.title}
-          fill
-          className="object-cover"
-        />
+        <img src={product.image} alt={product.title} className="object-cover" />
       </div>
 
       <div className="p-4">

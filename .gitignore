@@ -16,7 +16,7 @@
 # next.js
 /.next/
 /out/
-
+# vercel.json
 # production
 /build
 
@@ -43,3 +43,5 @@ next-env.d.ts
 # key
 /.env.local
 .env.local
+
+.vercel
