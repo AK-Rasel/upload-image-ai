@@ -5,7 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 
 export type Product = {
-  _id: string;
+  _id?: string;
+  id?: string;
   title: string;
   price: number;
   description: string;

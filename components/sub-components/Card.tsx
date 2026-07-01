@@ -1,20 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Image from "next/image";
+import type { Product } from "@/lib/redux/slices/productsSlice";
 
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  category: string;
-  brand: string;
-  stock: number;
-  rating: number;
-  reviews: number;
-  featured: boolean;
-  image: string;
-};
+// type Product = {
+//   id: number;
+//   title: string;
+//   description: string;
+//   price: number;
+//   category: string;
+//   brand: string;
+//   stock: number;
+//   rating: number;
+//   reviews: number;
+//   featured: boolean;
+//   image: string;
+// };
 
 type CardProps = {
   product: Product;

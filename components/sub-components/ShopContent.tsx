@@ -4,11 +4,7 @@ import Sidebar from "@/components/sub-components/Sidebar";
 import Card from "@/components/sub-components/Card";
 import TitleRow from "@/components/sub-components/TitleRow";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import {
-  fetchProducts,
-  setProducts,
-  type Product,
-} from "@/lib/redux/slices/productsSlice";
+import { setProducts, type Product } from "@/lib/redux/slices/productsSlice";
 import {
   setCategory,
   setMinPrice,
@@ -27,7 +23,6 @@ export default function ShopContent({
   const { selectedCategory, minPrice, maxPrice, sortBy, searchQuery } =
     useAppSelector((state) => state.filters);
 
-  // server theke pawa initial data Redux store-e bosao (hydrate)
   useEffect(() => {
     dispatch(setProducts(initialProducts));
   }, [initialProducts, dispatch]);
